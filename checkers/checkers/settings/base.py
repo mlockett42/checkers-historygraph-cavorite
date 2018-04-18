@@ -37,10 +37,12 @@ INSTALLED_APPS = [
 
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
 
     'rest_framework',
 
     'accounts',
+    'landingpage',
 ]
 
 MIDDLEWARE = [
@@ -118,7 +120,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '..', 'pypyjs-release'),
-    #os.path.join(BASE_DIR, '..', 'front-end'),
+    os.path.join(BASE_DIR, '..', 'front-end'),
     os.path.join(BASE_DIR, '..', 'checkers/static'),
 ]
 

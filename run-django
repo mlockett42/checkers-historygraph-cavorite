@@ -1,6 +1,6 @@
 #! /bin/bash
-#python /opt/project/pypyjs-release/pypyjs-release-nojit/tools/module_bundler.py add /opt/project/pypyjs-release/pypyjs-release-nojit/lib/modules/ /opt/project/cavorite/cavorite/
-#python /opt/project/pypyjs-release/pypyjs-release-nojit/tools/module_bundler.py add /opt/project/pypyjs-release/pypyjs-release-nojit/lib/modules/ /opt/project/front-end/fuelwatch/
-#python /opt/project/pypyjs-release/pypyjs-release-nojit/tools/module_bundler.py add /opt/project/pypyjs-release/pypyjs-release-nojit/lib/modules/ /opt/project/historygraph/historygraph/
+python /opt/project/pypyjs-release/pypyjs-release-nojit/tools/module_bundler.py add /opt/project/pypyjs-release/pypyjs-release-nojit/lib/modules/ /opt/project/cavorite/cavorite/
+python /opt/project/pypyjs-release/pypyjs-release-nojit/tools/module_bundler.py add /opt/project/pypyjs-release/pypyjs-release-nojit/lib/modules/ /opt/project/historygraph/historygraph/
+python /opt/project/pypyjs-release/pypyjs-release-nojit/tools/module_bundler.py add /opt/project/pypyjs-release/pypyjs-release-nojit/lib/modules/ /opt/project/front-end/checkers/
 python /opt/project/checkers/manage.py $*
 
