@@ -101,7 +101,7 @@ def bash():
 @task
 def setup():
     build()
-    create_symlinks()
+    #create_symlinks()
     migrate()
 
 """
@@ -130,7 +130,7 @@ def setup_chrome():
 @task
 def create_symlinks():
     print(yellow('Creating symlinks...'))
-    with lcd('./fuelwatch/fuelwatch/settings'):
+    with lcd('./checkers/checkers/settings'):
         local('rm -rf ./__init__.py')
         local('ln -s ./development.py ./__init__.py')
 
