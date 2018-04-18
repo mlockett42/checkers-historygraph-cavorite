@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
+import sys
+import tempfile
+
 """
 Django settings for checkers project.
 
@@ -13,19 +18,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+BASE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '..')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '379j8sr!^@b&cb@%8a5!2#87y6x!357h&tm41df!_mc&!b1_fi'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -37,6 +33,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', 
+
+    'allauth',
+    'allauth.account',
+
+    'rest_framework',
+
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -54,8 +58,7 @@ ROOT_URLCONF = 'checkers.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -63,22 +66,16 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'loaders': [
+                ('django.template.loaders.cached.Loader',
+                 ['django.template.loaders.filesystem.Loader',
+                  'django.template.loaders.app_directories.Loader'])
+            ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'checkers.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 
 # Password validation
@@ -118,3 +115,48 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, '..', 'pypyjs-release'),
+    #os.path.join(BASE_DIR, '..', 'front-end'),
+    os.path.join(BASE_DIR, '..', 'checkers/static'),
+]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'public/static')
+
+# Use a custom user model as per best practice
+AUTH_USER_MODEL = 'accounts.User'
+
+# All auth related settings
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+
+ACCOUNT_ADAPTER = 'accounts.adapters.CheckersAdapter'
+
+ACCOUNT_LOGOUT_ON_GET = True
+
+#TODO: Needs to be correctly set up in production
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+

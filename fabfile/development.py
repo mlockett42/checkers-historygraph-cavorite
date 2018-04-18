@@ -101,7 +101,7 @@ def bash():
 @task
 def setup():
     build()
-    #create_symlinks()
+    create_symlinks()
     migrate()
 
 """
