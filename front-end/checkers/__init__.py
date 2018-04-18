@@ -4,7 +4,7 @@ try:
 except ImportError:
     js = None
 from cavorite import c, t, Router, callbacks, timeouts, ajaxget
-import historygraph
+from .choose_game import choose_game_view
 
 
 def initialise_all_callbacks():
@@ -14,5 +14,14 @@ def initialise_all_callbacks():
 
 def start():
     initialise_all_callbacks()
-    print('Application started')
+    body = js.globals.document.body
+
+    error_404_page = c("div", [c("p", "No match 404 error"),
+                               c("p", [c("a", {"href": "/#!"}, "Back to main page")])])
+
+
+    r = Router({r'^$': choose_game_view(),
+                },
+                error_404_page, body)
+    r.route()
 

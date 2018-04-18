@@ -15,3 +15,5 @@ class User(AbstractUser):
 
     objects = managers.UserManager()
 
+    public_key = models.TextField(default='')
+

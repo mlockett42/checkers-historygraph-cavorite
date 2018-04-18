@@ -14,7 +14,7 @@
   <script src="/static/jquery/jquery.min.js"></script>
 
 </head>
-<body class="fixed-nav sticky-footer" id="page-top" {% block bodyattributes %}{% endblock %}>
+<body class="fixed-nav sticky-footer" id="page-top" data-current-user-public-key='{{current_user_public_key}}' {% block bodyattributes %}{% endblock %}>
   <div class="loading-screen">
     <div class="container-fluid">
       <div class="loader-items">

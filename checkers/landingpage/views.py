@@ -12,6 +12,7 @@ class LandingPageView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(LandingPageView, self).get_context_data(**kwargs)
         context['boot_file'] = 'boot_checkers.py'
+        context['current_user_public_key'] = self.request.user.public_key
         return context
 
 
